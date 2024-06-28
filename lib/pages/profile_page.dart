@@ -33,18 +33,34 @@ class _ProfilePageState extends State<ProfilePage> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.error, color: Colors.red, size: 50),
+                    SizedBox(height: 10),
+                    Text(
+                      'Error: ${snapshot.error}',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              );
             } else if (!snapshot.hasData) {
-              return Text('No data found');
+              return Center(child: Text('No data found'));
             } else {
               Profile profile = snapshot.data!;
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Username: ${profile.username}'),
-                  Text('UUID: ${profile.uuid}'),
-                  Text('Rank: ${profile.rank}'),
-                  Text('Level: ${profile.level}'),
+                  Text('Username: ${profile.profileId}'),
+                  Text('UUID: ${profile.cuteName}'),
+                  Text('Game Mode: ${profile.gameMode}'),
+                  Text('Current: ${profile.current}'),
+                  Text('Skills:'),
+                  Text('Farming XP: ${profile.skills.farming.xp}'),
+                  Text('Farming level: ${profile.skills.farming.level}'),
                 ],
               );
             }

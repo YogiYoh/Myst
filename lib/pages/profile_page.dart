@@ -1,80 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:myst_app/models/profile.dart';
+import '../models/profile.dart';
+import '../services/api_service.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String playerName;
+  final String username;
 
-  ProfilePage({required this.playerName});
+  ProfilePage({required this.username});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<Profile> profiles = [];
-  bool isLoading = false;
+  late Future<Profile> futureProfile;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final response = await http.get(
-      Uri.parse('https://sky.shiiyu.moe/api/v2/profile/${widget.playerName}'),
-    );
-
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      final List<Profile> loadedProfiles = data
-          .map((profileData) => Profile.fromJson(profileData))
-          .toList();
-
-      setState(() {
-        profiles = loadedProfiles;
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      throw Exception('Failed to load profiles');
-    }
+    futureProfile = ApiService().fetchProfile(widget.username);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profiles for ${widget.playerName}'),
+        title: Text('SkyBlock Profile'),
       ),
-      body: isLoading
-          ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : profiles.isEmpty
-          ? Center(
-        child: Text('No profiles found'),
-      )
-          : ListView.builder(
-        itemCount: profiles.length,
-        itemBuilder: (context, index) {
-          final profile = profiles[index];
-          return ListTile(
-            title: Text(profile.displayName),
-            subtitle: Text('Category: ${profile.category}'),
-            onTap: () {
-              // Handle profile tap
-            },
-          );
-        },
+      body: Center(
+        child: FutureBuilder<Profile>(
+          future: futureProfile,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.error, color: Colors.red, size: 50),
+                    SizedBox(height: 10),
+                    Text(
+                      'Error: ${snapshot.error}',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              );
+            } else if (!snapshot.hasData) {
+              return Center(child: Text('No data found'));
+            } else {
+              Profile profile = snapshot.data!;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text('Username: ${profile.profileId}'),
+                  Text('UUID: ${profile.cuteName}'),
+                  Text('Game Mode: ${profile.gameMode}'),
+                  Text('Current: ${profile.current}'),
+                  Text('Skills:'),
+                  Text('Farming XP: ${profile.skills.farming.xp}'),
+                  Text('Farming level: ${profile.skills.farming.level}'),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -1,62 +1,49 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// lib/models/profile.dart
+import 'skills.dart';
 
+class Skills {
+  final Skill taming;
+  final Skill farming;
+  // Add other skills here as needed
+
+  Skills({
+    required this.taming,
+    required this.farming,
+    // Add other skills here as required
+  });
+
+  factory Skills.fromJson(Map<String, dynamic> json) {
+    return Skills(
+      taming: Skill.fromJson(json['taming'] ?? {}),
+      farming: Skill.fromJson(json['farming'] ?? {}),
+      // Add other skills here as required
+    );
+  }
+}
 
 class Profile {
   final String profileId;
   final String cuteName;
+  final String gameMode;
   final bool current;
-  final int lastSave;
-  final Map<String, dynamic> raw;
-  final Map<String, dynamic> items;
-  final Map<String, dynamic> data;
-  final String id;
-  final String category;
-  final int damage;
+  final Skills skills;
 
   Profile({
     required this.profileId,
     required this.cuteName,
+    required this.gameMode,
     required this.current,
-    required this.lastSave,
-    required this.raw,
-    required this.items,
-    required this.data,
-    required this.id,
-    required this.category,
-    required this.damage,
+    required this.skills,
   });
 
+  // Factory method to convert JSON into a Profile object
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
-      profileId: json['profile_id'],
-      cuteName: json['cute_name'],
-      current: json['current'],
-      lastSave: json['last_save'],
-      raw: json['raw'],
-      items: json['items'],
-      data: json['data'],
-      id: json['id'] ?? '',
-      category: json['category'] ?? '',
-      damage: json['damage'] ?? 0,
+      profileId: json['profile_id'] ?? '', // ?? ' ' Use an empty string if 'profile_id' is null
+      cuteName: json['cute_name'] ?? '',
+      gameMode: json['game_mode'] ?? '',
+      current: json['current'] ?? false,
+      skills: Skills.fromJson(json['data']['skills']['skills'] ?? {}) ,  
     );
-  }
-
-  static Future<List<Profile>> fetchProfiles(String username) async {
-    final response = await http.get(
-      Uri.parse('https://sky.shiiyu.moe/api/v2/profile/$username'),
-    );
-
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      List<Profile> tempProfiles = [];
-      jsonData.forEach((profileId, profileData) {
-        Profile profile = Profile.fromJson(profileData);
-        tempProfiles.add(profile);
-      });
-      return tempProfiles;
-    } else {
-      return [];
-    }
   }
 }

@@ -17,15 +17,16 @@ class ApiService {
         // Try to decode the JSON response
         final jsonData = json.decode(response.body);
         final profiles = jsonData['profiles'];
-        final profileIdKey = profiles.keys.first; // Get the first profile ID
-        final profileData = profiles[profileIdKey]; // Get the profile data
-        // Check if the response contains the 'data' key and if it's not null
-        if(profileData['current'] == true){
+
+        for(var profileIdKey in profiles.keys){
+          final profileData = profiles[profileIdKey]; // Get the profile data
+          if(profileData['current'] == true){
             return Profile.fromJson(profileData);
-        }else{
+          }
+        }
+        // Check if the response contains the 'data' key and if it's not null
           print('Profile data is null or missing: ${response.body}');
           throw Exception('Profile data is null or missing');
-        }
       
       } catch (e) {
         // Extract profile data using the dynamic key

@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SkyBlock Profile'),
+        title: Text('SkyBlock Profile', style: TextStyle(fontFamily: 'Minecraftia')),
       ),
       body: Center(
         child: FutureBuilder<Profile>(
@@ -41,13 +41,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(height: 10),
                     Text(
                       'Error: ${snapshot.error}',
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: Colors.red, fontFamily: 'Minecraftia'),
                     ),
                   ],
                 ),
               );
             } else if (!snapshot.hasData) {
-              return Center(child: Text('No data found'));
+              return Center(child: Text('No data found', style: TextStyle(fontFamily: 'Minecraftia')));
             } else {
               Profile profile = snapshot.data!;
               return buildProf(profile);
@@ -58,159 +58,122 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
-  Widget buildProf(Profile profile){
+  Widget buildProf(Profile profile) {
     return Container(
-          padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Align(
         alignment: Alignment.topRight,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text('Username: ${profile.name.name} on ${profile.cuteName}'),
-            Text('Game Mode: ${profile.gameMode}'),
-            Text('Current: ${profile.current}'),
-            Text('Levels: '),
-            Text('Level: ${profile.levels.level}'),
-            Text('${profile.levels.xpCurrent} / ${profile.levels.xpForNext}'),
-
-
+            Text('Username: ${profile.name.name} on ${profile.cuteName}', style: TextStyle(fontFamily: 'Minecraftia')),
+            Text('Game Mode: ${profile.gameMode}', style: TextStyle(fontFamily: 'Minecraftia')),
+            Text('Current: ${profile.current}', style: TextStyle(fontFamily: 'Minecraftia')),
+            Text('Levels: ', style: TextStyle(fontFamily: 'Minecraftia')),
+            Text('Level: ${profile.levels.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+            Text('${profile.levels.xpCurrent} / ${profile.levels.xpForNext}', style: TextStyle(fontFamily: 'Minecraftia')),
 
             SizedBox(height: 20), // Adjust the height as needed
-             
-             
-           Center(
+
+            Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                     'Skills',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Minecraftia'),
                   ),
-                  
-                  
-                  
+
                   SizedBox(height: 10), // Optional: Add some space between the title and the other text
-                  
-                  
-                  
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Column(
                         children:[
-                          Text('Taming level: ${profile.skills.taming.level}'),
-                          Text('Taming XP: ${profile.skills.taming.xp}'),
+                          Text('Taming level: ${profile.skills.taming.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Taming XP: ${profile.skills.taming.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
-
                       Column(
                         children:[
-                          Text('Farming level: ${profile.skills.farming.level}'),
-                          Text('Farming XP: ${profile.skills.farming.xp}'),
+                          Text('Farming level: ${profile.skills.farming.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Farming XP: ${profile.skills.farming.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
                       Column(
                         children:[
-                          Text('Mining level: ${profile.skills.mining.level}'),
-                          Text('Mining XP: ${profile.skills.mining.xp}'),
+                          Text('Mining level: ${profile.skills.mining.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Mining XP: ${profile.skills.mining.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
-
                     ],
-
                   ),
 
-
-
-
                   SizedBox(height: 10), // Optional: Add some space between the title and the other text
-                  
-                  
-                  
-                  
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Column(
                         children:[
-                        Text('Combat level: ${profile.skills.combat.level}'),
-                        Text('Combat XP: ${profile.skills.combat.xp}'),
+                          Text('Combat level: ${profile.skills.combat.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Combat XP: ${profile.skills.combat.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
-
                       Column(
                         children:[
-                        Text('Foraging level: ${profile.skills.foraging.level}'),
-                        Text('Foraging XP: ${profile.skills.foraging.xp}'),
+                          Text('Foraging level: ${profile.skills.foraging.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Foraging XP: ${profile.skills.foraging.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
                       Column(
                         children:[
-                        Text('Fishing level: ${profile.skills.fishing.level}'),
-                        Text('Fishing XP: ${profile.skills.fishing.xp}'),
+                          Text('Fishing level: ${profile.skills.fishing.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Fishing XP: ${profile.skills.fishing.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
                     ],
                   ),
 
-                  
-                  
                   SizedBox(height: 10), // Optional: Add some space between the title and the other text
-                 
-                 
-                 
-                 
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Column(
                         children:[
-                          Text('Enchanting level: ${profile.skills.enchanting.level}'),
-                          Text('Enchanting XP: ${profile.skills.enchanting.xp}'),
+                          Text('Enchanting level: ${profile.skills.enchanting.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Enchanting XP: ${profile.skills.enchanting.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
-
                       Column(
                         children:[
-                          Text('Alchemy level: ${profile.skills.alchemy.level}'),
-                          Text('Alchemy XP: ${profile.skills.alchemy.xp}'),
+                          Text('Alchemy level: ${profile.skills.alchemy.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Alchemy XP: ${profile.skills.alchemy.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
                       Column(
                         children:[
-                          Text('Carpentry level: ${profile.skills.carpentry.level}'),
-                          Text('Carpentry XP: ${profile.skills.carpentry.xp}'),
+                          Text('Carpentry level: ${profile.skills.carpentry.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Carpentry XP: ${profile.skills.carpentry.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
                     ],
                   ),
-                  
-                  
+
                   SizedBox(height: 10),
 
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Column(
                         children:[
-                          Text('Runecrafting level: ${profile.skills.runecrafting.level}'),
-                          Text('Runecrafting XP: ${profile.skills.runecrafting.xp}'),
+                          Text('Runecrafting level: ${profile.skills.runecrafting.level}', style: TextStyle(fontFamily: 'Minecraftia')),
+                          Text('Runecrafting XP: ${profile.skills.runecrafting.xp}', style: TextStyle(fontFamily: 'Minecraftia')),
                         ],
                       ),
-
-
                     ],
-
-
                   ),
                 ],
               ),
@@ -218,25 +181,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
-    
-  
-
-
-
-
-
     );
-
-
-
-
-
+  }
 }
-
-
-
-
-
-
-}
-

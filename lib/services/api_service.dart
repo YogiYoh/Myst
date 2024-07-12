@@ -21,12 +21,12 @@ class ApiService {
         final profileData = profiles[profileIdKey]; // Get the profile data
         // Check if the response contains the 'data' key and if it's not null
         if(profileData['current'] == true){
-            return Profile.fromJson(profileData);
+          return Profile.fromJson(profileData);
         }else{
           print('Profile data is null or missing: ${response.body}');
           throw Exception('Profile data is null or missing');
         }
-      
+
       } catch (e) {
         // Extract profile data using the dynamic key
         // Print an error message and throw an exception if JSON decoding fails
@@ -34,10 +34,10 @@ class ApiService {
         final jsonData = json.decode(response.body);
         final profileId = jsonData.keys.first; // Potential error if no keys
         final profileData = jsonData[profileId]; // Potential error if key not present or data is not in expected format
-        
-        String cute_name = profileData['cute_name']; 
 
-        print(cute_name); 
+        String cute_name = profileData['cute_name'];
+
+        print(cute_name);
 
         throw Exception('Failed to decode JSON');
       }

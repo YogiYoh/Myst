@@ -23,3 +23,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/fonts/
+
+  fonts:
+    - family: Minecraftia
+      fonts:
+        - asset: assets/fonts/Minecraftia.ttf

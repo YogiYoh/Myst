@@ -9,16 +9,31 @@ class ProfilePage extends StatefulWidget {
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
+
 }
+
 
 class _ProfilePageState extends State<ProfilePage> {
   late Future<Profile> futureProfile;
-
+  String _dropdownValue = 'Option 1'; 
   @override
   void initState() {
     super.initState();
     futureProfile = ApiService().fetchProfile(widget.username);
+
   }
+
+    void dropdownCallback(String? selectedValue){
+      if (selectedValue is String){
+        setState(() {
+            _dropdownValue = selectedValue; 
+        });
+      }
+    }
+
+  
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +81,25 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text('Username: ${profile.name.name} on ${profile.cuteName}', style: TextStyle(fontFamily: 'Minecraftia')),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget> [
+              Text('Username: ${profile.name.name} on ', style: TextStyle(fontFamily: 'Minecraftia')),
+              DropdownButton<String>(
+                items: const [
+                  DropdownMenuItem(child: Text("Coconut"), value: "Coconut"),
+                  DropdownMenuItem(child: Text("Lime"), value: "Lime"),
+                ],
+                value: profile.cuteName, 
+                onChanged: dropdownCallback,
+                ),
+              ],
+            ), 
+            
+            
+            
+            
             Text('Game Mode: ${profile.gameMode}', style: TextStyle(fontFamily: 'Minecraftia')),
             Text('Current: ${profile.current}', style: TextStyle(fontFamily: 'Minecraftia')),
             Text('Levels: ', style: TextStyle(fontFamily: 'Minecraftia')),

@@ -86,6 +86,7 @@ class Profile {
   final Skills skills;
   final Level levels;
   final username name;
+  final List<String> otherNames; 
 
   Profile({
     required this.profileId,
@@ -95,9 +96,10 @@ class Profile {
     required this.skills,
     required this.levels,
     required this.name,
+    required this.otherNames,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
+  factory Profile.fromJson(Map<String, dynamic> json, otherNames) {
     return Profile(
       profileId: json['profile_id'] ?? '',
       cuteName: json['cute_name'] ?? '',
@@ -106,6 +108,7 @@ class Profile {
       levels: Level.fromJson(json['data']['skyblock_level'] ?? {}),
       skills: Skills.fromJson(json['data']['skills']['skills'] ?? {}),
       name: username.fromJson(json['data'] ?? {}),
+      otherNames: otherNames ?? [], 
     );
   }
 }

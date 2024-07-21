@@ -11,14 +11,15 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 
 }
-
-
 class _ProfilePageState extends State<ProfilePage> {
   late Future<Profile> futureProfile;
+  late String selectedProfileName;
   @override
   void initState() {
     super.initState();
+    selectedProfileName = ''; 
     futureProfile = ApiService().fetchProfile(widget.username);
+
   }
   @override
   Widget build(BuildContext context) {
@@ -82,17 +83,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   }).toList(), 
                   onChanged: (String? newValue){
                     setState((){
-                      selectedValue = newValue!; 
-          
+                      selectedProfileName = newValue!;
+                      futureProfile = ApiService().newProfile(profile.name.name, newValue!); 
                     });
                   },
                 ),
               ],
             ), 
             
-            
-      
-            
+            Text('Game Mode: ${profile.profileId}', style: TextStyle(fontFamily: 'Minecraftia')),
             Text('Game Mode: ${profile.gameMode}', style: TextStyle(fontFamily: 'Minecraftia')),
             Text('Current: ${profile.current}', style: TextStyle(fontFamily: 'Minecraftia')),
             Text('Levels: ', style: TextStyle(fontFamily: 'Minecraftia')),

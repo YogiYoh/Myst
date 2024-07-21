@@ -76,15 +76,26 @@ class ApiService {
         // Try to decode the JSON response
         final jsonData = json.decode(response.body);
         final profiles = jsonData['profiles'];
+        
+       
+        // Collect all cuteNames 
         for(var profileIdKey in profiles.keys){
           final profileData = profiles[profileIdKey]; // Get the profile data
+          otherNames.add(profileData['cute_name']); 
+          print('Adding ${profileData['cute_name']} to otherNames');
+        }
 
 
-
-          if(profileData['current'] == cutename){
+        // Second pass: Find the current profile
+        for(var profileIdKey in profiles.keys){
+          final profileData = profiles[profileIdKey]; // Get the profile data
+          if(profileData['cute_name'] == cutename){
+            // Remove the current profile from otherNames
+            otherNames.remove(profileData['cute_name']);
+            otherNames.insert(0, profileData['cute_name']);
+            // Debugging output for otherNames before returning
+            print('Current profile found, otherNames after removal: $otherNames');
             return Profile.fromJson(profileData, otherNames);
-          }else{
-            otherNames.add(profileData['cute_name']); 
           }
         }
         // Check if the response contains the 'data' key and if it's not null

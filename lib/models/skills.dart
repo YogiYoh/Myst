@@ -1,5 +1,5 @@
 class Skill {
-  final double xp;
+  final int xp;
   final int level;
   final int maxLevel;
   final int xpCurrent;
@@ -27,11 +27,11 @@ class Skill {
 
   factory Skill.fromJson(Map<String, dynamic> json) {
     return Skill(
-      xp: json['xp'] ?? 0.0,
+      xp: (json['xp'] ?? 0.0).toInt(), // Convert xp to integer
       level: json['level'] ?? 0,
       maxLevel: json['maxLevel'] ?? 0,
-      xpCurrent: json['xpCurrent'] ?? 0,
-      xpForNext: json['xpForNext'] ?? 0,
+      xpCurrent: (json['xpCurrent'] ?? 0.0).toInt(), // Convert xpCurrent to integer
+      xpForNext: (json['xpForNext'] ?? 0.0).toInt(), // Convert xpForNext to integer
       progress: json['progress'] ?? 0.0,
       levelCap: json['levelCap'] ?? 0,
       uncappedLevel: json['uncappedLevel'] ?? 0,
@@ -41,4 +41,3 @@ class Skill {
     );
   }
 }
-

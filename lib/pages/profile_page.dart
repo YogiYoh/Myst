@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/profile.dart';
 import '../services/api_service.dart';
+import 'package:intl/intl.dart';
 
+
+var numberFormat = NumberFormat('#,###');
 class ProfilePage extends StatefulWidget {
   final String username;
 
@@ -13,10 +16,11 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late Future<Profile> futureProfile;
-
+  late String selectedProfileName;
   @override
   void initState() {
     super.initState();
+    selectedProfileName = '';
     futureProfile = ApiService().fetchProfile(widget.username);
   }
 
@@ -58,10 +62,28 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+String formatNumber(double number) {
+  if (number >= 1e12) {
+    return '${(number / 1e12).toStringAsFixed(2)}T';
+  } else if (number >= 1e9) {
+    return '${(number / 1e9).toStringAsFixed(2)}B';
+  } else if (number >= 1e6) {
+    return '${(number / 1e6).toStringAsFixed(2)}M';
+  } else if (number >= 1e3) {
+    return '${(number / 1e3).toStringAsFixed(3)}K';
+  } else {
+    return number.toStringAsFixed(0);
+  }
+}
+
+
+
   Widget buildProf(BuildContext context, Profile profile) {
     // Get the screen width and height
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    List<String> otherNames = profile.otherNames.toSet().toList(); 
+    String selectedValue = profile.cuteName; 
 
     // Calculate a scaling factor based on the screen size
     double scaleFactor = screenWidth / 375.0; // Assuming 375 is the base width for scaling
@@ -73,7 +95,30 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text('Username: ${profile.name.name} on ${profile.cuteName}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
+            Row (
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                   Text('Username: ${profile.name.name} on ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
+                    DropdownButton<String>(
+                          value: selectedValue, 
+                          items: otherNames.map((String name){
+                            return DropdownMenuItem(
+                              value: name, 
+                              child: Text(name, style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor))
+                            );
+                          }).toList(), 
+                          onChanged: (String? newValue){
+                            setState((){
+                              selectedProfileName = newValue!;
+                              futureProfile = ApiService().newProfile(profile.name.name, newValue!); 
+                            });
+                          },
+                        ),
+                ],
+            ), 
+           
+
             Text('Game Mode: ${profile.gameMode}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
             Text('Current: ${profile.current}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
             Text('Levels: ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
@@ -81,7 +126,73 @@ class _ProfilePageState extends State<ProfilePage> {
             Text('${profile.levels.xpCurrent} / ${profile.levels.xpForNext}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 16 * scaleFactor)),
 
             SizedBox(height: 20 * scaleFactor), // Adjust the height as needed
+            
 
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        Text('Joined: ${profile.year.joinedYear}', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    ],
+                  ),
+                  
+                  SizedBox(width: 10),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        Text('Networth: ${formatNumber(profile.cash.networth)} ', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    ],
+                  ),
+
+                  SizedBox(width: 10),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        Text('Purse: ${formatNumber(profile.cash.purse)} ', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    ],
+                  ),
+
+                  SizedBox(width: 10),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:[
+                        if(profile.cash.bank > 0)
+                          Text('Bank Account: ${formatNumber(profile.cash.bank)} ', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    
+                    ],
+                  ),
+
+
+                  SizedBox(width: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        Text('Lily Weight: ${numberFormat.format((profile.lily.lilyWeight).toInt())} ', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    ],
+                  ),
+
+                  SizedBox(width: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        Text('Senither Weight: ${numberFormat.format((profile.senither.senitherWeight).toInt())} ', style: TextStyle(fontFamily: 'Minecraftia',fontSize: 4 * scaleFactor)),
+                    ],
+                  ),
+
+                  SizedBox(width: 10),
+                
+                ],
+              )
+            ),
+      
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

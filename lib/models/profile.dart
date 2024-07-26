@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'skills.dart';
 
 class Skills {
@@ -44,6 +46,40 @@ class Skills {
   }
 }
 
+class WeightCash{ 
+  final double networth;
+  final double purse;
+  final String joinedYear; 
+  final double senitherWeight; 
+  final double lilyWeight; 
+  final double bank; 
+
+  WeightCash({
+    required this.networth,
+    required this.purse,
+    required this.joinedYear, 
+    required this.senitherWeight, 
+    required this.lilyWeight, 
+    required this.bank, 
+
+  }); 
+
+  factory WeightCash.fromJson(Map<String, dynamic> json){
+    return WeightCash(
+      networth: json["networth"] ?? 0.0, 
+      purse: json["purse"] ?? 0.0, 
+      joinedYear: json["text"] ?? '', 
+      senitherWeight: json["overall"] ?? 0.0, 
+      lilyWeight: json['total'] ?? 0.0, 
+      bank: json['bank'] ?? 0.0, 
+    ); 
+  }
+
+}
+
+
+
+
 class Level {
   final int level;
   final int xpCurrent;
@@ -78,6 +114,8 @@ class username {
   }
 }
 
+
+
 class Profile {
   final String profileId;
   final String cuteName;
@@ -86,6 +124,11 @@ class Profile {
   final Skills skills;
   final Level levels;
   final username name;
+  final List<String> otherNames; 
+  final WeightCash cash; 
+  final WeightCash year; 
+  final WeightCash senither; 
+  final WeightCash lily; 
 
   Profile({
     required this.profileId,
@@ -95,9 +138,14 @@ class Profile {
     required this.skills,
     required this.levels,
     required this.name,
+    required this.otherNames,
+    required this.cash, 
+    required this.year, 
+    required this.senither, 
+    required this.lily, 
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
+  factory Profile.fromJson(Map<String, dynamic> json, otherNames) {
     return Profile(
       profileId: json['profile_id'] ?? '',
       cuteName: json['cute_name'] ?? '',
@@ -106,6 +154,11 @@ class Profile {
       levels: Level.fromJson(json['data']['skyblock_level'] ?? {}),
       skills: Skills.fromJson(json['data']['skills']['skills'] ?? {}),
       name: username.fromJson(json['data'] ?? {}),
+      otherNames: otherNames ?? [], 
+      cash: WeightCash.fromJson(json['data']['networth'] ?? {}), 
+      year: WeightCash.fromJson(json['data']['user_data']['first_join'] ?? {}), 
+      senither: WeightCash.fromJson(json['data']['weight']['senither'] ?? {}),
+      lily: WeightCash.fromJson(json['data']['weight']['lily'] ?? {}), 
     );
   }
 }

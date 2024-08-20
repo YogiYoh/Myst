@@ -162,15 +162,3 @@ class Profile {
     );
   }
 }
-
-class PlayerModel {
-  final String modelName;
-
-  PlayerModel({required this.modelName});
-
-  factory PlayerModel.fromJson(Map<String, dynamic> json) {
-    return PlayerModel(
-      modelName: json['modelName'] ?? '',
-    );
-  }
-}

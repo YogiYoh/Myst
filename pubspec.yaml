@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cached_network_image: ^3.2.0
 
   # Add the http package for making HTTP requests
   http: ^0.13.3
@@ -32,3 +33,4 @@ flutter:
     - family: Minecraftia
       fonts:
         - asset: assets/fonts/Minecraftia.ttf
+

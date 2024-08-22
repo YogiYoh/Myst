@@ -222,100 +222,180 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Text('Taming: ${profile.skills.taming.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.taming.xpForNext > 0 ? profile.skills.taming.xpCurrent / profile.skills.taming.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.taming.xpCurrent)} / ${formatNumber(profile.skills.taming.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
-                                  ),
+                              if(profile.skills.taming.xpForNext != 0)
+                                Stack(
+                                children: <Widget>[
+                                Container(
+                                  width: 200, // Adjust as needed
+                                  height: 10,
+                                  child: LinearProgressIndicator(
+                                    value: (profile.skills.taming.xpForNext > 0 ? profile.skills.taming.xpCurrent / profile.skills.taming.xpForNext : 0.0),
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                  ), 
                                 ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.taming.xpCurrent)} / ${formatNumber(profile.skills.taming.xpForNext)}',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                children: <Widget>[
+                                Container(
+                                  width: 200, // Adjust as needed
+                                  height: 10,
+                                  child: LinearProgressIndicator(
+                                    value: 100,
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                  ), 
+                                ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.taming.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
+
+
                           Column(
                             children: [
                               Text('Farming: ${profile.skills.farming.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.farming.xpForNext > 0 ? profile.skills.farming.xpCurrent / profile.skills.farming.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.farming.xpCurrent)} / ${formatNumber(profile.skills.farming.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.farming.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.farming.xpForNext > 0 ? profile.skills.farming.xpCurrent / profile.skills.farming.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
+                                Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '${formatNumber(profile.skills.farming.xpCurrent)} / ${formatNumber(profile.skills.farming.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                      ),
+                                    )
+                                    ),
+                                  ),
+                                ],
+                              )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      width: 200, // Adjust as needed
+                                      height: 10,
+                                      child: LinearProgressIndicator(
+                                        value: 100,
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                      ), 
+                                    ),
+                                Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                    '${formatNumber(profile.skills.farming.xpCurrent)} XP',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Minecraftia',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                    ),
+                                  )
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-
                             ],
-                          ),
+                          )
+                      ],
+                    ),
                           Column(
                             children: [
                               Text('Mining: ${profile.skills.mining.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.mining.xpForNext > 0 ? profile.skills.mining.xpCurrent / profile.skills.mining.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
+                              if(profile.skills.mining.xpForNext != 0)
+                                Stack(
+                                      children: <Widget>[
+                                      Container(
+                                        width: 200, // Adjust as needed
+                                        height: 10,
+                                        child: LinearProgressIndicator(
+                                          value: (profile.skills.mining.xpForNext > 0 ? profile.skills.mining.xpCurrent / profile.skills.mining.xpForNext : 0.0),
+                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                        ), 
+                                      ),
+                                      Positioned.fill(
+                                        child: Center(
+                                          child: Text(
+                                          '${formatNumber(profile.skills.mining.xpCurrent)} / ${formatNumber(profile.skills.mining.xpForNext)} XP',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Minecraftia',
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                    children: <Widget>[
+                                    Container(
+                                      width: 200, // Adjust as needed
+                                      height: 10,
+                                      child: LinearProgressIndicator(
+                                        value: 100,
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                      ), 
+                                    ),
+                                    Positioned.fill(
+                                      child: Center(
+                                        child: Text(
+                                        '${formatNumber(profile.skills.mining.xpCurrent)} XP',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'Minecraftia',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.mining.xpCurrent)} / ${formatNumber(profile.skills.mining.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
                             ],
                           ),
-                        ],
-                      ),
                       SizedBox(height: 10 * scaleFactor), // Optional: Add some space between the title and the other text
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -324,96 +404,174 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Text('Combat: ${profile.skills.combat.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.combat.xpForNext > 0 ? profile.skills.combat.xpCurrent / profile.skills.combat.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.combat.xpCurrent)} / ${formatNumber(profile.skills.combat.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.combat.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.combat.xpForNext > 0 ? profile.skills.combat.xpCurrent / profile.skills.combat.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.combat.xpCurrent)} / ${formatNumber(profile.skills.combat.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.combat.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
-                          Column(
+                        Column(
                             children: [
                               Text('Foraging: ${profile.skills.foraging.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.foraging.xpForNext > 0 ? profile.skills.foraging.xpCurrent / profile.skills.foraging.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.foraging.xpCurrent)} / ${formatNumber(profile.skills.foraging.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.foraging.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.foraging.xpForNext > 0 ? profile.skills.foraging.xpCurrent / profile.skills.foraging.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.foraging.xpCurrent)} / ${formatNumber(profile.skills.foraging.xpForNext)}',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.foraging.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
                           Column(
                             children: [
                               Text('Fishing: ${profile.skills.fishing.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.fishing.xpForNext > 0 ? profile.skills.fishing.xpCurrent / profile.skills.fishing.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.fishing.xpCurrent)} / ${formatNumber(profile.skills.fishing.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.fishing.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.fishing.xpForNext > 0 ? profile.skills.fishing.xpCurrent / profile.skills.fishing.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.fishing.xpCurrent)} / ${formatNumber(profile.skills.fishing.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.fishing.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
                         ],
@@ -426,98 +584,178 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Text('Enchanting: ${profile.skills.enchanting.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.enchanting.xpForNext > 0 ? profile.skills.enchanting.xpCurrent / profile.skills.enchanting.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.enchanting.xpCurrent)} / ${formatNumber(profile.skills.enchanting.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.enchanting.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.enchanting.xpForNext > 0 ? profile.skills.enchanting.xpCurrent / profile.skills.enchanting.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.enchanting.xpCurrent)} / ${formatNumber(profile.skills.enchanting.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.enchanting.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
-                          Column(
+                         Column(
                             children: [
                               Text('Alchemy: ${profile.skills.alchemy.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                                                          Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.alchemy.xpForNext > 0 ? profile.skills.alchemy.xpCurrent / profile.skills.alchemy.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.alchemy.xpCurrent)} / ${formatNumber(profile.skills.alchemy.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.alchemy.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.alchemy.xpForNext > 0 ? profile.skills.alchemy.xpCurrent / profile.skills.alchemy.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                          Column(
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.alchemy.xpCurrent)} / ${formatNumber(profile.skills.alchemy.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.alchemy.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                            ],
+                          ),
+                         Column(
                             children: [
                               Text('Carpentry: ${profile.skills.carpentry.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.carpentry.xpForNext > 0 ? profile.skills.carpentry.xpCurrent / profile.skills.carpentry.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.carpentry.xpCurrent)} / ${formatNumber(profile.skills.carpentry.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.carpentry.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.carpentry.xpForNext > 0 ? profile.skills.carpentry.xpCurrent / profile.skills.carpentry.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.carpentry.xpCurrent)} / ${formatNumber(profile.skills.carpentry.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.carpentry.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                            ],
+                          ),
+                        ],
+                      ),
                       SizedBox(height: 10 * scaleFactor), // Optional: Add some space between the title and the other text
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -526,32 +764,58 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: [
                               Text('Runecrafting: ${profile.skills.runecrafting.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
                               SizedBox(height: 20), // Space between text and progress bar
-                            Stack(
-                              children: <Widget>[
-                              Container(
-                                width: 200, // Adjust as needed
-                                height: 10,
-                                child: LinearProgressIndicator(
-                                  value: (profile.skills.runecrafting.xpForNext > 0 ? profile.skills.runecrafting.xpCurrent / profile.skills.runecrafting.xpForNext : 0.0),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                                ), 
-                              ),
-                              Positioned.fill(
-                                child: Center(
-                                  child: Text(
-                                  '${formatNumber(profile.skills.runecrafting.xpCurrent)} / ${formatNumber(profile.skills.runecrafting.xpForNext)}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Minecraftia',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 4 * scaleFactor, // Adjust font size as needed
+                              if(profile.skills.runecrafting.xpForNext != 0)
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: (profile.skills.runecrafting.xpForNext > 0 ? profile.skills.runecrafting.xpCurrent / profile.skills.runecrafting.xpForNext : 0.0),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                    ), 
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.runecrafting.xpCurrent)} / ${formatNumber(profile.skills.runecrafting.xpForNext)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else
+                                Stack(
+                                  children: <Widget>[
+                                  Container(
+                                    width: 200, // Adjust as needed
+                                    height: 10,
+                                    child: LinearProgressIndicator(
+                                      value: 100,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                    ), 
+                                  ),
+                                  Positioned.fill(
+                                    child: Center(
+                                      child: Text(
+                                      '${formatNumber(profile.skills.runecrafting.xpCurrent)} XP',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'Minecraftia',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 4 * scaleFactor, // Adjust font size as needed
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ],
                           ),
                         ],

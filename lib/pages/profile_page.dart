@@ -165,7 +165,9 @@ Widget buildProf(BuildContext context, Profile profile) {
             Text('Senither Weight: ${numberFormat.format((profile.senither.senitherWeight).toInt())} ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
             if (profile.cash.bank > 0)
               Text('Bank Account: ${formatNumber(profile.cash.bank)} ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-            Image.asset('assets/armor/wise_dragon_armor/icons/wise_dragon_boots.png'),
+            Image.asset(
+              'assets/icons/wise_dragon_boots.png',
+            ),
           ],
         ),
       ), 

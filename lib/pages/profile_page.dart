@@ -165,9 +165,10 @@ Widget buildProf(BuildContext context, Profile profile) {
             Text('Senither Weight: ${numberFormat.format((profile.senither.senitherWeight).toInt())} ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
             if (profile.cash.bank > 0)
               Text('Bank Account: ${formatNumber(profile.cash.bank)} ', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
+            Image.asset('assets/armor/wise_dragon_armor/icons/wise_dragon_boots.png'),
           ],
         ),
-      ),
+      ), 
     ),
       
       Padding(
@@ -180,7 +181,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                   Text(
                     'Level: ${profile.levels.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 12 * scaleFactor)
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 5 * scaleFactor),
                   Stack(
                     children: <Widget>[
                       Container(
@@ -213,7 +214,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Taming: ${profile.skills.taming.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.taming.xpForNext != 0)
                             Stack(
                             children: <Widget>[
@@ -273,7 +274,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Farming: ${profile.skills.farming.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.farming.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -331,7 +332,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Mining: ${profile.skills.mining.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.mining.xpForNext != 0)
                             Stack(
                                   children: <Widget>[
@@ -395,7 +396,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Combat: ${profile.skills.combat.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.combat.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -453,7 +454,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                     Column(
                         children: [
                           Text('Foraging: ${profile.skills.foraging.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.foraging.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -511,7 +512,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Fishing: ${profile.skills.fishing.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.fishing.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -575,7 +576,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Enchanting: ${profile.skills.enchanting.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.enchanting.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -633,7 +634,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Alchemy: ${profile.skills.alchemy.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.alchemy.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -691,7 +692,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Carpentry: ${profile.skills.carpentry.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.carpentry.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -755,7 +756,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       Column(
                         children: [
                           Text('Runecrafting: ${profile.skills.runecrafting.level}', style: TextStyle(fontFamily: 'Minecraftia', fontSize: 10 * scaleFactor)),
-                          SizedBox(height: 20), // Space between text and progress bar
+                          SizedBox(height: 10 * scaleFactor), // Space between text and progress bar
                           if(profile.skills.runecrafting.xpForNext != 0)
                             Stack(
                               children: <Widget>[
@@ -812,7 +813,7 @@ Widget buildProf(BuildContext context, Profile profile) {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20 * scaleFactor), // Adjust the height as needed
+                  SizedBox(height: 10 * scaleFactor), // Adjust the height as needed
                   CarouselSlider(
                     options: CarouselOptions(
                       height: 60 * scaleFactor, // Adjust the height as needed

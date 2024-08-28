@@ -8,7 +8,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SkyBlock Profile Search'),
+        title: Text('SkyBlock Profile Search', style: TextStyle(fontFamily: 'Minecraftia')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

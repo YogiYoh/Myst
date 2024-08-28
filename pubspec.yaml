@@ -29,6 +29,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/fonts/
+    - assets/armor/
 
   fonts:
     - family: Minecraftia
